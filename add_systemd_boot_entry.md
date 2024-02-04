@@ -13,7 +13,7 @@ fstype should be vfat and parttype should be `c12a7328-f81f-11d2-ba4b-00a0c93ec9
 		* if `bootx64.efi` doesn't exist in your pc, search for `systemd-bootx64.efi` instead (probably loacted in `/usr/lib/systemd/boot/efi/systemd-bootx64.efi`), copy to a path realtive to the mount point and rename it to `bootx64.efi`
 	* run 
 	```
-		sudo bootctl -esp--path=/path/you/copied/bootx64.efi/to install
+		sudo bootctl --path=/path/you/copied/bootx64.efi/to install
 	```
 	* Notes: you can copy Pop OS's default configuration (/boot/efi) and make the file's `bootx64.efi` path: /mount/point/boot/efi, so the last command becomes: `sudo bootctl -esp--path=/mount/point/boot/efi install`
 * if there's no mount point indicated --> `bootx64.efi` doesn't have access to the esp and additionally there may be no such file
@@ -21,12 +21,12 @@ fstype should be vfat and parttype should be `c12a7328-f81f-11d2-ba4b-00a0c93ec9
 		* make the directory `/boot/efi` if it doesn't exist
 		* run
 		```
-		mount dev/esp_partition_name /boot/efi
+		mount dev/esp_partition_name mount/point/boot/efi
 		```
-		* access the directory `/boot/efi` and add/move/copy the `bootx64.efi` file as described above
+		* access the directory `mount/point/boot/efi` and add/move/copy the `bootx64.efi` file as described above
 		* run
 		```
-		 sudo bootctl -esp--path=/boot/efi install
+		 sudo bootctl --path=mount/point/boot/efi install
 		```
 		* Note: since systemd-boot will try to find the esp in /boot, /efi and /boot/efi by default, the last command can be altered to: `sudo bootctl install`
 #### Notes:
